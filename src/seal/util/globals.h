@@ -93,6 +93,8 @@ For .NET Framework wrapper support (C++/CLI) we need to
 
             extern const std::vector<SmallModulus> small_mods_30bit;
 
+            extern const std::vector<SmallModulus> small_mods_32bit;
+
             // For internal use only, do not modify
             namespace internal_mods
             {

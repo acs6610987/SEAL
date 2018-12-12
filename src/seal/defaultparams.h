@@ -158,6 +158,25 @@ namespace seal
     }
 
     /**
+    Returns a 32-bit coefficient modulus prime.
+
+    @param[in] index The list index of the prime
+    @throws std::out_of_range if index is not within [0, 64)
+    */
+    inline SmallModulus small_mods_32bit(std::size_t index)
+    {
+        try
+        {
+            return util::global_variables::small_mods_32bit.at(index);
+        }
+        catch (const std::exception &)
+        {
+            throw std::out_of_range("index out of range");
+        }
+        return 0;
+    }
+
+    /**
     Returns the largest allowed decomposition bit count (60).
     */
     constexpr int dbc_max()

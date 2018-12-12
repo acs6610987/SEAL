@@ -285,6 +285,25 @@ namespace seal
                 0x36100001,  0x35d40001,  0x35ac0001,  0x35a00001
             };
 
+            const vector<SmallModulus> small_mods_32bit{
+                0xfff00001,  0xffac0001,  0xff780001,  0xff1c0001,
+                0xfef40001,  0xfee00001,  0xfeac0001,  0xfe980001,
+                0xfe740001,  0xfe5c0001,  0xfe4c0001,  0xfe040001,
+                0xfdf00001,  0xfda80001,  0xfd800001,  0xfd0c0001,  
+                0xfcd00001,  0xfc940001,  0xfc300001,  0xfbc80001, 
+                0xfba00001,  0xfb340001,  0xfb280001,  0xfb200001, 
+                0xfb040001,  0xfafc0001,  0xfaf00001,  0xfad40001, 
+                0xfa500001,  0xfa380001,  0xfa240001,  0xfa140001, 
+                0xfa080001,  0xfa000001,  0xf9e40001,  0xf9d00001, 
+                0xf9b80001,  0xf96c0001,  0xf9600001,  0xf9580001, 
+                0xf9480001,  0xf91c0001,  0xf8c80001,  0xf8940001,
+                0xf88c0001,  0xf8640001,  0xf8040001,  0xf7cc0001, 
+                0xf7a80001,  0xf7a40001,  0xf7900001,  0xf7680001, 
+                0xf7300001,  0xf7080001,  0xf6c40001,  0xf6b80001, 
+                0xf6ac0001,  0xf6780001,  0xf6280001,  0xf6040001, 
+                0xf5580001,  0xf5200001,  0xf4e40001,  0xf4d40001
+            };
+
             namespace internal_mods
             {
                 const SmallModulus m_sk(0x1fffffffffe00001);
