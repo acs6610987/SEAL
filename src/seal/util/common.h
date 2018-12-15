@@ -36,8 +36,8 @@ namespace seal
         {
         };
 
-        template<typename T, typename... Rest>
-        constexpr bool is_uint64_v = is_uint64<T, Rest...>::value;
+        //template<typename T, typename... Rest>
+        //constexpr bool is_uint64_v = is_uint64<T, Rest...>::value;
 
         template<typename T, typename S, 
             typename = enable_if_t<std::is_integral<T>::value>,
@@ -367,7 +367,7 @@ namespace seal
             return((operand >> 16) | (operand << 16));
         }
 
-        template<typename T, typename = std::enable_if<is_uint64_v<T>>>
+        template<typename T, typename = std::enable_if<is_uint64<T>::value>>
         inline constexpr T reverse_bits(T operand) noexcept
         {
             return static_cast<T>(reverse_bits(static_cast<std::uint32_t>(operand >> 32))) |
@@ -387,7 +387,7 @@ namespace seal
                 (static_cast<std::uint64_t>(reverse_bits(operand)) >> (32 - bit_count)));
         }
 
-        template<typename T, typename = std::enable_if<is_uint64_v<T>>>
+        template<typename T, typename = std::enable_if<is_uint64<T>::value>>
         inline T reverse_bits(T operand, int bit_count)
         {
 #ifdef SEAL_DEBUG
