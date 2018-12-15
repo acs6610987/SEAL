@@ -6,7 +6,7 @@
 #if SEAL_COMPILER == SEAL_COMPILER_GCC
 
 // We require GCC >= 6
-#if (__GNUC__ < 6) || not defined(__cplusplus)
+#if (__GNUC__ < 4) || not defined(__cplusplus)
 #pragma GCC error "SEAL requires __GNUC__ >= 6"
 #endif
 
