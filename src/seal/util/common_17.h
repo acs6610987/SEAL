@@ -16,9 +16,6 @@ namespace seal
 {
     namespace util
     {
-        template< bool B, class T = void >
-        using enable_if_t = typename std::enable_if<B,T>::type;
-
         template<typename T, typename...>
         struct is_uint64 : std::conditional<
             std::is_integral<T>::value && 
@@ -40,62 +37,62 @@ namespace seal
         constexpr bool is_uint64_v = is_uint64<T, Rest...>::value;
 
         template<typename T, typename S, 
-            typename = enable_if_t<std::is_integral<T>::value>,
-            typename = enable_if_t<std::is_integral<S>::value>>
+            typename = std::enable_if_t<std::is_integral<T>::value>,
+            typename = std::enable_if_t<std::is_integral<S>::value>>
         inline constexpr bool unsigned_lt(T in1, S in2) noexcept
         {
             return static_cast<std::uint64_t>(in1) < static_cast<std::uint64_t>(in2);
         }
 
         template<typename T, typename S, 
-            typename = enable_if_t<std::is_integral<T>::value>,
-            typename = enable_if_t<std::is_integral<S>::value>>
+            typename = std::enable_if_t<std::is_integral<T>::value>,
+            typename = std::enable_if_t<std::is_integral<S>::value>>
         inline constexpr bool unsigned_leq(T in1, S in2) noexcept
         {
             return static_cast<std::uint64_t>(in1) <= static_cast<std::uint64_t>(in2);
         }
 
         template<typename T, typename S, 
-            typename = enable_if_t<std::is_integral<T>::value>,
-            typename = enable_if_t<std::is_integral<S>::value>>
+            typename = std::enable_if_t<std::is_integral<T>::value>,
+            typename = std::enable_if_t<std::is_integral<S>::value>>
         inline constexpr bool unsigned_gt(T in1, S in2) noexcept
         {
             return static_cast<std::uint64_t>(in1) > static_cast<std::uint64_t>(in2);
         }
 
         template<typename T, typename S, 
-            typename = enable_if_t<std::is_integral<T>::value>,
-            typename = enable_if_t<std::is_integral<S>::value>>
+            typename = std::enable_if_t<std::is_integral<T>::value>,
+            typename = std::enable_if_t<std::is_integral<S>::value>>
         inline constexpr bool unsigned_geq(T in1, S in2) noexcept
         {
             return static_cast<std::uint64_t>(in1) >= static_cast<std::uint64_t>(in2);
         }
 
         template<typename T, typename S, 
-            typename = enable_if_t<std::is_integral<T>::value>,
-            typename = enable_if_t<std::is_integral<S>::value>>
+            typename = std::enable_if_t<std::is_integral<T>::value>,
+            typename = std::enable_if_t<std::is_integral<S>::value>>
         inline constexpr bool unsigned_eq(T in1, S in2) noexcept
         {
             return static_cast<std::uint64_t>(in1) == static_cast<std::uint64_t>(in2);
         }
 
         template<typename T, typename S, 
-            typename = enable_if_t<std::is_integral<T>::value>,
-            typename = enable_if_t<std::is_integral<S>::value>>
+            typename = std::enable_if_t<std::is_integral<T>::value>,
+            typename = std::enable_if_t<std::is_integral<S>::value>>
         inline constexpr bool unsigned_neq(T in1, S in2) noexcept
         {
             return static_cast<std::uint64_t>(in1) != static_cast<std::uint64_t>(in2);
         }
 
         template<typename T, 
-            typename = enable_if_t<std::is_integral<T>::value>>
+            typename = std::enable_if_t<std::is_integral<T>::value>>
         inline constexpr T mul_safe(T in1) noexcept
         {
             return in1;
         }
 
         template<typename T, 
-            typename = enable_if_t<std::is_integral<T>::value>>
+            typename = std::enable_if_t<std::is_integral<T>::value>>
         inline constexpr T mul_safe(T in1, T in2)
         {
             SEAL_IF_CONSTEXPR (std::is_unsigned<T>::value)
@@ -143,21 +140,21 @@ namespace seal
         }
 
         template<typename T, typename... Args, 
-            typename = enable_if_t<std::is_integral<T>::value>>
+            typename = std::enable_if_t<std::is_integral<T>::value>>
         inline constexpr T mul_safe(T in1, T in2, Args &&...args)
         {
             return mul_safe(mul_safe(in1, in2), mul_safe(std::forward<Args>(args)...));
         }
 
         template<typename T, 
-            typename = enable_if_t<std::is_arithmetic<T>::value>>
+            typename = std::enable_if_t<std::is_arithmetic<T>::value>>
         inline constexpr T add_safe(T in1) noexcept
         {
             return in1;
         }
 
         template<typename T, 
-            typename = enable_if_t<std::is_arithmetic<T>::value>>
+            typename = std::enable_if_t<std::is_arithmetic<T>::value>>
         inline constexpr T add_safe(T in1, T in2)
         {
             SEAL_IF_CONSTEXPR (std::is_unsigned<T>::value)
@@ -185,14 +182,14 @@ namespace seal
         }
 
         template<typename T, typename... Args, 
-            typename = enable_if_t<std::is_arithmetic<T>::value>>
+            typename = std::enable_if_t<std::is_arithmetic<T>::value>>
         inline constexpr T add_safe(T in1, T in2, Args &&...args)
         {
             return add_safe(add_safe(in1, in2), add_safe(std::forward<Args>(args)...));
         }
 
         template<typename T, 
-            typename = enable_if_t<std::is_arithmetic<T>::value>>
+            typename = std::enable_if_t<std::is_arithmetic<T>::value>>
         inline T sub_safe(T in1, T in2)
         {
             SEAL_IF_CONSTEXPR (std::is_unsigned<T>::value)
@@ -220,8 +217,8 @@ namespace seal
         }
 
         template<typename T, typename S, 
-            typename = enable_if_t<std::is_arithmetic<T>::value>,
-            typename = enable_if_t<std::is_arithmetic<S>::value>>
+            typename = std::enable_if_t<std::is_arithmetic<T>::value>,
+            typename = std::enable_if_t<std::is_arithmetic<S>::value>>
         inline constexpr bool fits_in(S value SEAL_MAYBE_UNUSED) noexcept
         {
             SEAL_IF_CONSTEXPR (std::is_same<T, S>::value)
@@ -296,36 +293,36 @@ namespace seal
         }
 
         template<typename T, typename... Args, 
-            typename = enable_if_t<std::is_arithmetic<T>::value>>
+            typename = std::enable_if_t<std::is_arithmetic<T>::value>>
         inline constexpr bool sum_fits_in(Args &&...args)
         {
             return fits_in<T>(add_safe(std::forward<Args>(args)...));
         }
 
         template<typename T, typename... Args, 
-            typename = enable_if_t<std::is_arithmetic<T>::value>>
+            typename = std::enable_if_t<std::is_arithmetic<T>::value>>
         inline constexpr bool sum_fits_in(T in1, Args &&...args)
         {
             return fits_in<T>(add_safe(in1, std::forward<Args>(args)...));
         }
 
         template<typename T, typename... Args, 
-            typename = enable_if_t<std::is_arithmetic<T>::value>>
+            typename = std::enable_if_t<std::is_arithmetic<T>::value>>
         inline constexpr bool product_fits_in(Args &&...args)
         {
             return fits_in<T>(mul_safe(std::forward<Args>(args)...));
         }
 
         template<typename T, typename... Args, 
-            typename = enable_if_t<std::is_arithmetic<T>::value>>
+            typename = std::enable_if_t<std::is_arithmetic<T>::value>>
         inline constexpr bool product_fits_in(T in1, Args &&...args)
         {
             return fits_in<T>(mul_safe(in1, std::forward<Args>(args)...));
         }
 
         template<typename T, typename S, 
-            typename = enable_if_t<std::is_arithmetic<T>::value>,
-            typename = enable_if_t<std::is_arithmetic<S>::value>>
+            typename = std::enable_if_t<std::is_arithmetic<T>::value>,
+            typename = std::enable_if_t<std::is_arithmetic<S>::value>>
         inline T safe_cast(S value)
         {
             SEAL_IF_CONSTEXPR (!std::is_same<T, S>::value)
@@ -561,7 +558,7 @@ namespace seal
         constexpr double epsilon = std::numeric_limits<T>::epsilon();
 
         template<typename T,
-            typename = enable_if_t<std::is_floating_point<T>::value>>
+            typename = std::enable_if_t<std::is_floating_point<T>::value>>
         constexpr bool are_close(T value1, T value2) noexcept
         {
             double scale_factor = std::max<T>({ std::fabs(value1), std::fabs(value2), T{ 1.0 } });
@@ -569,7 +566,7 @@ namespace seal
         }
 
         template<typename T, 
-            typename = enable_if_t<std::is_integral<T>::value>>
+            typename = std::enable_if_t<std::is_integral<T>::value>>
         constexpr bool is_zero(T value) noexcept
         {
             return value == T{ 0 };

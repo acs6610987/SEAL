@@ -23,14 +23,14 @@ namespace seal
     namespace util
     {
         template<typename T = void, 
-            typename = enable_if_t<std::is_standard_layout<T>::value>>
+            typename = std::enable_if_t<std::is_standard_layout<T>::value>>
         class ConstPointer;
 
         template<>
         class ConstPointer<SEAL_BYTE>;
 
         template<typename T = void, 
-            typename = enable_if_t<std::is_standard_layout<T>::value>>
+            typename = std::enable_if_t<std::is_standard_layout<T>::value>>
         class Pointer;
 
         class MemoryPoolItem

@@ -54,7 +54,7 @@ message(STATUS "SEAL debug mode: ${SEAL_DEBUG}")
 
 # Should we use C++14 or C++17?
 set(SEAL_USE_CXX17_OPTION_STR "Use C++17")
-option(SEAL_USE_CXX17 ${SEAL_USE_CXX17_OPTION_STR} ON)
+option(SEAL_USE_CXX17 ${SEAL_USE_CXX17_OPTION_STR} OFF)
 message(STATUS "${SEAL_USE_CXX17_OPTION_STR} (SEAL_USE_CXX17): ${SEAL_USE_CXX17}")
 
 # Conditionally enable features from C++17
@@ -62,7 +62,7 @@ set(SEAL_USE_STD_BYTE OFF)
 set(SEAL_USE_SHARED_MUTEX OFF)
 set(SEAL_USE_IF_CONSTEXPR OFF)
 set(SEAL_USE_MAYBE_UNUSED OFF)
-set(SEAL_LANG_FLAG "-std=c++14")
+set(SEAL_LANG_FLAG "-std=c++11")
 if(SEAL_USE_CXX17)
 	set(SEAL_USE_STD_BYTE ON)
 	set(SEAL_USE_SHARED_MUTEX ON)
@@ -305,7 +305,7 @@ target_include_directories(seal PUBLIC
 if(SEAL_USE_CXX17)
 	target_compile_features(seal PUBLIC cxx_std_17)
 else()
-	target_compile_features(seal PUBLIC cxx_std_14)
+	target_compile_features(seal PUBLIC cxx_std_11)
 endif()
 
 # Add -maes flag if needed
