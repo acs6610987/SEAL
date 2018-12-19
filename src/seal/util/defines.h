@@ -29,7 +29,8 @@ static_assert(sizeof(unsigned long long) == 8, "Require sizeof(unsigned long lon
 #define SEAL_COEFF_MOD_COUNT_MIN 1
 
 // Bounds for polynomial modulus degree
-#define SEAL_POLY_MOD_DEGREE_MAX 32768
+//#define SEAL_POLY_MOD_DEGREE_MAX 32768
+#define SEAL_POLY_MOD_DEGREE_MAX 65536
 #define SEAL_POLY_MOD_DEGREE_MIN 2
 
 // Bounds for the plaintext modulus
@@ -38,7 +39,8 @@ static_assert(sizeof(unsigned long long) == 8, "Require sizeof(unsigned long lon
 
 // Upper bound on the size of a ciphertext
 #define SEAL_CIPHERTEXT_SIZE_MIN 2
-#define SEAL_CIPHERTEXT_SIZE_MAX 32768
+//#define SEAL_CIPHERTEXT_SIZE_MAX 32768
+#define SEAL_CIPHERTEXT_SIZE_MAX 65536
 
 // Bounds for decomposition bit count
 #define SEAL_DBC_MAX 60
