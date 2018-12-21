@@ -630,7 +630,7 @@ namespace seal
 
             auto res = util::allocate<std::complex<double>>(coeff_count, pool);
 
-            double two_pow_64 = std::pow(2.0, 64);
+            long double two_pow_64 = std::pow(2.0, 64);
             for (std::size_t i = 0; i < coeff_count; i++)
             {
                 for (std::size_t j = 0; j < coeff_mod_count; j++)
@@ -648,7 +648,7 @@ namespace seal
                         wide_tmp_dest.get() + (i * coeff_mod_count));
                 }
 
-                double res_accum = 0.0;
+                long double res_accum = 0.0;
                 if (util::is_greater_than_or_equal_uint_uint(
                     wide_tmp_dest.get() + (i * coeff_mod_count),
                     upper_half_threshold, coeff_mod_count))
@@ -666,19 +666,21 @@ namespace seal
                             diff = -static_cast<double>(decryption_modulus[j]
                                 - wide_tmp_dest[i * coeff_mod_count + j]);
                         }
-                        res_accum += diff * pow(two_pow_64, j);
+                        if (std::fabs(diff) > 1e-50) // (Juhou: ignore too small values)
+                          res_accum += diff * pow(two_pow_64, j);
                     }
                 }
                 else
                 {
                     for (std::size_t j = 0; j < coeff_mod_count; j++)
                     {
-                        res_accum += static_cast<double>(
-                            wide_tmp_dest[i * coeff_mod_count + j]) * pow(two_pow_64, j);
+                      auto wtd = wide_tmp_dest[i * coeff_mod_count + j];
+                      if (wtd > 0)
+                        res_accum += wtd * std::pow(two_pow_64, j);
                     }
                 }
 
-                res[i] = res_accum * inv_scale;
+                res[i] = (double)(res_accum * inv_scale);
             }
 
             std::size_t tt = coeff_count;
