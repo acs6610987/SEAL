@@ -107,15 +107,6 @@ namespace seal
             return decomposition_bit_count_;
         }
 
-        /*
-        Returns a reference to the decomposition bit count. (This allows us to set the dbc
-        when we design our own 'load' function.)
-        */
-        inline int& decomposition_bit_count() noexcept
-        {
-            return decomposition_bit_count_;
-        }
-
         /**
         Returns a reference to the relinearization keys data.
         */
